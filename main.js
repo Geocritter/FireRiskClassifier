@@ -1,2 +1,2 @@
-import impImg from '../ImportImage.js'
+import importImage from '../ImportImage.js'
 
