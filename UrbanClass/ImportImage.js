@@ -1,7 +1,8 @@
 exports.importImage = function(sDate, eDate, roi) {
   // Load the Landsat 8 scaled radiance image collection.
   var landsatCollection = ee.ImageCollection('LANDSAT/LC08/C01/T1')
-      .filterDate(sDate, eDate);
+      .filterDate(sDate, eDate)
+      .clip(roi);
   
   // Make a cloud-free composite.
   var composite = ee.Algorithms.Landsat.simpleComposite({
