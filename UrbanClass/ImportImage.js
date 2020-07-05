@@ -1,4 +1,4 @@
-exports.importImage = function(sDate, eDate, roi) {
+exports.importImage = function(sDate, eDate) {
   // Load the Landsat 8 scaled radiance image collection.
   var landsatCollection = ee.ImageCollection('LANDSAT/LC08/C01/T1')
       .filterDate(sDate, eDate);
