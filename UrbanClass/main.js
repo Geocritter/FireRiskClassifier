@@ -1169,11 +1169,11 @@ var classified = result.select(bands).classify(classifier);
 
 // Define a palette for the Land Use classification.
 var palette = [
-  'D3D3D3', // urban (0)  // grey
-  '0000FF', // water (1)  // blue
-  '008000', // forest (2) // green
-  '735005', // brown
-  
+  '01380A', // heavy veg
+  '07DB29', // light veg
+  '0000FF', // water 
+  '735005', // bare
+  'D3D3D3', // urban 
 ];
 
 // Display the classification result and the input image.
