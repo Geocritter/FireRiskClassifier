@@ -11,5 +11,5 @@ exports.importImage = function() {
   
   // Visualize the Composite
   console.log("test")
-  Map.addLayer(composite, {bands: ['B4', 'B3', 'B2'], max: 0.5, gamma: 2}, 'L8 Image', false);
+  return(composite);
 }
