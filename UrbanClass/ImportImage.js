@@ -5,7 +5,7 @@ exports.importImage = function(sDate, eDate, roi) {
   
   // Make a cloud-free composite.
   var composite = ee.Algorithms.Landsat.simpleComposite({
-    collection: landsatCollection.clip(roi),
+    collection: landsatCollection.clipToCollection(roi),
     asFloat: true
   });
   
