@@ -3,11 +3,9 @@ exports.importImage = function(sDate, eDate, roi) {
   var landsatCollection = ee.ImageCollection('LANDSAT/LC08/C01/T1')
       .filterDate(sDate, eDate)
   
-  var landsatCollection2 = landSatCollection.clip(roi)
-  
   // Make a cloud-free composite.
   var composite = ee.Algorithms.Landsat.simpleComposite({
-    collection: landsatCollection,
+    collection: landsatCollection.clip(roi),
     asFloat: true
   });
   
