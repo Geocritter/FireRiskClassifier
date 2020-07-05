@@ -15,6 +15,21 @@ var roi =
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
 const maxYear = 2015;
 var year = 1995;
-var result = a.importImage('2017-01-01', '2017-12-31', roi)
+/*------------------------------------------------------------------------------
+                          Start of Training data
+-------------------------------------------------------------------------------*/
+// Select the bands for training
+var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7'];
 
+// Sample the input imagery to get a FeatureCollection of training data.
+var training = composite.select(bands).sampleRegions({
+  collection: newfc,
+  properties: ['landcover'],
+  scale: 30
+});
+
+/*------------------------------------------------------------------------------
+            Start of image loading >> classified image loading
+-------------------------------------------------------------------------------*/
+var result = a.importImage('2017-05-01', '2017-12-31', roi)
 Map.addLayer(result, {bands: ['B4', 'B3', 'B2'], gamma: 2.2});
