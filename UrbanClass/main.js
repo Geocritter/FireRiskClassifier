@@ -13,8 +13,9 @@ var roi =
           [-120.99904152998705, 41.346599408357]]], null, false);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
-const maxDate = 2015;
-var date = 1995.toString();
+const maxYear = 2015;
+var year = 1995;
+var sDate = year.toString()+
 /*------------------------------------------------------------------------------
                              Start Training 
 -------------------------------------------------------------------------------*/
@@ -35,8 +36,27 @@ var classifier = ee.Classifier.randomForest().train({
   inputProperties: bands
 });
 
+//Initiate loop start for next x amount of images
 /*------------------------------------------------------------------------------
             Start of image loading >> classified image loading
 -------------------------------------------------------------------------------*/
 var result = a.importImage('2017-05-01', '2017-12-31', roi)
 Map.addLayer(result, {bands: ['B4', 'B3', 'B2'], gamma: 2.2});
+
+
+//Classify starts here
+var classified = composite.select(bands).classify(classifier);
+
+// Define a palette for the Land Use classification.
+var palette = [
+  'D3D3D3', // urban (0)  // grey
+  '0000FF', // water (1)  // blue
+  '008000' //  forest (2) // green
+];
+
+// Display the classification result and the input image.
+Map.setCenter(-96.0171, 29.6803);
+Map.addLayer(classified, {min: 0, max: 2, palette: palette}, 'Land Use Classification');
+
+
+
