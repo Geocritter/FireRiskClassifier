@@ -10,5 +10,5 @@ exports.importImage = function() {
   });
   
   // Visualize the Composite
-  retun(Map.addLayer(composite, {bands: ['B4', 'B3', 'B2'], max: 0.5, gamma: 2}, 'L8 Image', false));
+  (Map.addLayer(composite, {bands: ['B4', 'B3', 'B2'], max: 0.5, gamma: 2}, 'L8 Image', false);
 }
