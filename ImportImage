@@ -1,4 +1,3 @@
-
 exports.importImage = function(startDate, endDate, imageCollection) {
   // Load the Landsat 8 scaled radiance image collection.
   var landsatCollection = ee.ImageCollection(imageCollection)
