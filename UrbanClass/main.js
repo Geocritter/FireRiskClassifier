@@ -13,10 +13,10 @@ var roi =
           [-120.99904152998705, 41.346599408357]]], null, false);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
-const maxYear = 2015;
-var year = 1995;
+const maxDate = 2015;
+var date = 1995.toString();
 /*------------------------------------------------------------------------------
-                          Start of Training data
+                             Start Training 
 -------------------------------------------------------------------------------*/
 // Select the bands for training
 var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7'];
@@ -26,6 +26,13 @@ var training = composite.select(bands).sampleRegions({
   collection: newfc,
   properties: ['landcover'],
   scale: 30
+});
+
+// Make a Random Forest classifier and train it.
+var classifier = ee.Classifier.randomForest().train({
+  features: training,
+  classProperty: 'landcover',
+  inputProperties: bands
 });
 
 /*------------------------------------------------------------------------------
