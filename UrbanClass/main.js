@@ -800,4 +800,4 @@ var palette = [
 Map.addLayer(classified, {min: 0, max: 2, palette: palette}, 'Land Use Classification');
 
 
-
+// little test for git
