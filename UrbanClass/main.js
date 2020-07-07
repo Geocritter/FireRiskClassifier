@@ -1082,7 +1082,7 @@ while(year<=2012){
     /*------------------------------------------------------------------------------
                 Start of image loading >> classified image loading
     -------------------------------------------------------------------------------*/
-    var result = a.importImage('2010-05-01', '2010-08-31', roi)
+    var result = a.importImage(sDate, eDate, roi)
     Map.addLayer(result, {bands: ['B4', 'B3', 'B2'], gamma: 2.2});
     
     
@@ -1108,8 +1108,6 @@ while(year<=2012){
       scale: 30,
       region: roi
     });
-    Map.remove(0)
-    Map.remove(1)
     year = year + 2
     var sDate = year.toString()+start
     var eDate = year.toString()+end
