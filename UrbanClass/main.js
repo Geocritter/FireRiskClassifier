@@ -1038,8 +1038,11 @@ var roi =
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
 var label = 'landcover'
-var year = "2010";
-var sDate = year.toString()
+var year = 2010
+var start = "-05-01"
+var end = "-08-31"
+var sDate = year.toString()+start
+var eDate = year.toString()+end
 var newfc = ee.FeatureCollection([
   ee.Feature(heavyVeg, {'class': 0}),
   ee.Feature(lightVeg, {'class': 1}),
