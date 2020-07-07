@@ -1044,11 +1044,11 @@ var end = "-08-31"
 var sDate = year.toString()+start
 var eDate = year.toString()+end
 var newfc = ee.FeatureCollection([
-  ee.Feature(heavyVeg, {'class': 0}),
-  ee.Feature(lightVeg, {'class': 1}),
-  ee.Feature(water, {'class': 2}),
-  ee.Feature(bare, {'class': 3}),
-  ee.Feature(urban, {'class': 4})
+    ee.Feature(heavyVeg, {'class': 0}),
+    ee.Feature(lightVeg, {'class': 1}),
+    ee.Feature(water, {'class': 2}),
+    ee.Feature(bare, {'class': 3}),
+    ee.Feature(urban, {'class': 4})
 ]);
 
 var result = a.importImage('2010-05-01', '2010-08-31', roi)
@@ -1062,9 +1062,9 @@ var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7'];
 
 // Sample the input imagery to get a FeatureCollection of training data.
 var training = result.select(bands).sampleRegions({
-  collection: newfc,
-  properties: ['class'],
-  scale: 30
+    collection: newfc,
+    properties: ['class'],
+    scale: 30
 });
 
 // Train a CART classifier with default parameters.
@@ -1078,32 +1078,39 @@ var classifier = ee.Classifier.randomForest().train({
 });*/
 
 //Initiate loop start for next x amount of images
-/*------------------------------------------------------------------------------
-            Start of image loading >> classified image loading
--------------------------------------------------------------------------------*/
-var result = a.importImage('2010-05-01', '2010-08-31', roi)
-Map.addLayer(result, {bands: ['B4', 'B3', 'B2'], gamma: 2.2});
-
-
-// Classify the image with the same bands used for training.
-var classified = result.select(bands).classify(trained);
-
-// Define a palette for the Land Use classification.
-var palette = [
-  '01380A', // heavy veg
-  '07DB29', // light veg
-  '0000FF', // water 
-  '735005', // bare
-  'a3a3a3', // urban 
-];
-
-// Display the classification result and the input image.
-Map.addLayer(classified, {min: 0, max: 4, palette: palette}, 'Land Use Classification');
-
-// Export the image, specifying scale and region.
-Export.image.toDrive({
-  image: classified,
-  description: year,
-  scale: 30,
-  region: roi
-});
+while(year<=2012){
+    /*------------------------------------------------------------------------------
+                Start of image loading >> classified image loading
+    -------------------------------------------------------------------------------*/
+    var result = a.importImage('2010-05-01', '2010-08-31', roi)
+    Map.addLayer(result, {bands: ['B4', 'B3', 'B2'], gamma: 2.2});
+    
+    
+    // Classify the image with the same bands used for training.
+    var classified = result.select(bands).classify(trained);
+    
+    // Define a palette for the Land Use classification.
+    var palette = [
+      '01380A', // heavy veg
+      '07DB29', // light veg
+      '0000FF', // water 
+      '735005', // bare
+      'a3a3a3', // urban 
+    ];
+    
+    // Display the classification result and the input image.
+    Map.addLayer(classified, {min: 0, max: 4, palette: palette}, 'Land Use Classification');
+    
+    // Export the image, specifying scale and region.
+    Export.image.toDrive({
+      image: classified,
+      description: year,
+      scale: 30,
+      region: roi
+    });
+    Map.remove(0)
+    Map.remove(1)
+    year = year + 2
+    var sDate = year.toString()+start
+    var eDate = year.toString()+end
+}
