@@ -1,4 +1,4 @@
-exports.removeLayer = function() {
+exports.removeLayer = function(name) {
   var layers = Map.layers()
   // list of layers names
   var names = []
