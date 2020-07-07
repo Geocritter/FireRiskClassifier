@@ -11,6 +11,5 @@ exports.importImage = function(sDate, eDate, roi) {
   });
   
   // Visualize the Composite
-  console.log("test")
   return(composite);
 }
