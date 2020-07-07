@@ -1080,6 +1080,7 @@ var classifier = ee.Classifier.randomForest().train({
 
 //Initiate loop start for next x amount of images
 while(year<=2012){
+    console.log(year)
     /*------------------------------------------------------------------------------
                 Start of image loading >> classified image loading
     -------------------------------------------------------------------------------*/
