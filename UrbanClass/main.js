@@ -1105,7 +1105,7 @@ while(year<=2012){
     // Export the image, specifying scale and region.
     Export.image.toDrive({
       image: classified,
-      description: year,
+      description: year.toString(),
       scale: 30,
       region: roi
     });
