@@ -1052,17 +1052,19 @@ var newfc = ee.FeatureCollection([
     ee.Feature(urban, {'class': 4})
 ]);
 
-var result = a.importImage('2010-05-01', '2010-08-31', roi)
+var trainImg = a.importImage('2010-05-01', '2010-08-31', roi)
 
 /*------------------------------------------------------------------------------
-                             Start Training 
+                             Start Training
+    Training is based off of a LANDSAT 5 image from 2010, training image
+    can be changed by modifying the timeframe within the variable trainImg.
 -------------------------------------------------------------------------------*/
 // Select the bands for training
 var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7'];
 
 
 // Sample the input imagery to get a FeatureCollection of training data.
-var training = result.select(bands).sampleRegions({
+var training = trainImg.select(bands).sampleRegions({
     collection: newfc,
     properties: ['class'],
     scale: 30
@@ -1071,13 +1073,6 @@ var training = result.select(bands).sampleRegions({
 // Train a CART classifier with default parameters.
 var trained = ee.Classifier.smileCart().train(training, 'class', bands);
 
-/* Make a Random Forest classifier and train it.
-var classifier = ee.Classifier.randomForest().train({
-  features: training,
-  classProperty: 'landcover',
-  inputProperties: bands
-});*/
-
 //Initiate loop start for next x amount of images
 while(year<=2012){
     console.log(year)
@@ -1085,12 +1080,16 @@ while(year<=2012){
                 Start of image loading >> classified image loading
     -------------------------------------------------------------------------------*/
     var result = a.importImage(sDate, eDate, roi)
-    Map.addLayer(result, {bands: ['B4', 'B3', 'B2'], gamma: 2.2});
+    //Map.addLayer(result, {bands: ['B4', 'B3', 'B2'], gamma: 2.2});
     
     
     // Classify the image with the same bands used for training.
     var classified = result.select(bands).classify(trained);
     
+    /* ***ONLY TURN THIS SECTION ON IF YOU WANT TO DISPLAY THE CLASSIFICATION
+          THIS WILL SEVERLY SLOW DOWN GEE IF YOU DISPLAY EVERY LAYER
+          DO AT YOUR OWN RISK
+  ----------------------------------------------------------------------------------
     // Define a palette for the Land Use classification.
     var palette = [
       '01380A', // heavy veg
@@ -1102,6 +1101,7 @@ while(year<=2012){
     
     // Display the classification result and the input image.
     Map.addLayer(classified, {min: 0, max: 4, palette: palette}, 'Land Use Classification '+year.toString());
+  ----------------------------------------------------------------------------------  */
     
     // Export the image, specifying scale and region.
     Export.image.toDrive({
@@ -1110,7 +1110,6 @@ while(year<=2012){
       scale: 30,
       region: roi
     });
-    remove.removeLayer('Land Use Classification '+year.toString())
     year = year + 2
     sDate = year.toString()+start
     eDate = year.toString()+end
