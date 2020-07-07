@@ -1044,7 +1044,6 @@ var roi =
 
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
 var remove = require('users/tonywangs/GEOG481:UrbanClass/RemoveLayer.js')
-var label = 'landcover'
 // change year and cap to determine beginning and end of timescope, respectively
 var year = 1995
 var cap = 2012
