@@ -1113,13 +1113,12 @@ while(year<=cap){
   ----------------------------------------------------------------------------------  */
     
     /*
-        *NOTE: this will create a task to export the classification
+        *NOTE: this will create a task to export the classification as a GeoTIFF
         In order to export the classification:
         > go to the right-hand panel
         > click tasks
         > click run for each proposed task (classification will be labeled by year)
         > ideally you'd want to save to google drive for ezpz exports to elsewhere
-        > select GeoTIFF format
     */
     Export.image.toDrive({
       image: classified,
