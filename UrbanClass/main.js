@@ -1039,7 +1039,7 @@ var roi =
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
 var remove = require('users/tonywangs/GEOG481:UrbanClass/RemoveLayer.js')
 var label = 'landcover'
-var year = 2010
+var year = 1995
 var start = "-05-01"
 var end = "-08-31"
 var sDate = year.toString()+start
@@ -1100,7 +1100,7 @@ while(year<=2012){
     ];
     
     // Display the classification result and the input image.
-    Map.addLayer(classified, {min: 0, max: 4, palette: palette}, 'Land Use Classification');
+    Map.addLayer(classified, {min: 0, max: 4, palette: palette}, 'Land Use Classification '+year.toString());
     
     // Export the image, specifying scale and region.
     Export.image.toDrive({
@@ -1111,6 +1111,6 @@ while(year<=2012){
     });
     remove.removeLayer()
     year = year + 2
-    var sDate = year.toString()+start
-    var eDate = year.toString()+end
+    sDate = year.toString()+start
+    eDate = year.toString()+end
 }
