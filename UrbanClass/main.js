@@ -1037,7 +1037,7 @@ var roi =
            [-122.41197767658403, 40.56992075357311]]]]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
-var remove = require('users/tonywangs/GEOG481:UrbanClass/RemoveLayer.js)
+var remove = require('users/tonywangs/GEOG481:UrbanClass/RemoveLayer.js')
 var label = 'landcover'
 var year = 2010
 var start = "-05-01"
