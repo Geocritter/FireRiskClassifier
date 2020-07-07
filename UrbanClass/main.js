@@ -1045,11 +1045,14 @@ var roi =
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
 var remove = require('users/tonywangs/GEOG481:UrbanClass/RemoveLayer.js')
 var label = 'landcover'
+// change year and cap to determine beginning and end of timescope, respectively
 var year = 1995
+var cap = 2012
 var start = "-05-01"
 var end = "-08-31"
 var sDate = year.toString()+start
 var eDate = year.toString()+end
+// compilation of test-features compiled into one FeatureCollection (and numbered)
 var newfc = ee.FeatureCollection([
     ee.Feature(heavyVeg, {'class': 0}),
     ee.Feature(lightVeg, {'class': 1}),
@@ -1080,7 +1083,7 @@ var training = trainImg.select(bands).sampleRegions({
 var trained = ee.Classifier.smileCart().train(training, 'class', bands);
 
 //Initiate loop start for next x amount of images
-while(year<=2012){
+while(year<=cap){
     console.log(year)
     /*------------------------------------------------------------------------------
                 Start of image loading >> classified image loading
@@ -1110,11 +1113,13 @@ while(year<=2012){
   ----------------------------------------------------------------------------------  */
     
     /*
-        *NOTE: this will create a task to export the classification as a geoTIFF
+        *NOTE: this will create a task to export the classification
         In order to export the classification:
         > go to the right-hand panel
         > click tasks
         > click run for each proposed task (classification will be labeled by year)
+        > ideally you'd want to save to google drive for ezpz exports to elsewhere
+        > select GeoTIFF format
     */
     Export.image.toDrive({
       image: classified,
