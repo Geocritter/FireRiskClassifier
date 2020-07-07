@@ -1109,7 +1109,7 @@ while(year<=2012){
       scale: 30,
       region: roi
     });
-    tools.removeLayer(name)
+    tools.removeLayer()
     year = year + 2
     var sDate = year.toString()+start
     var eDate = year.toString()+end
