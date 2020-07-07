@@ -1110,7 +1110,7 @@ while(year<=2012){
       scale: 30,
       region: roi
     });
-    remove.removeLayer()
+    remove.removeLayer('Land Use Classification '+year.toString())
     year = year + 2
     sDate = year.toString()+start
     eDate = year.toString()+end
