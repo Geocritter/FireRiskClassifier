@@ -1036,6 +1036,12 @@ var roi =
            [-122.41115155620744, 40.569904454047716],
            [-122.41197767658403, 40.56992075357311]]]]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
+/* 
+    This script and helper functions were written by Yiqing Wang
+    Training data was scouted and selected by Victor Li
+    This is made for GEOG 481, for group 5
+*/
+
 var a = require('users/tonywangs/GEOG481:UrbanClass/ImportImage.js');
 var remove = require('users/tonywangs/GEOG481:UrbanClass/RemoveLayer.js')
 var label = 'landcover'
@@ -1103,7 +1109,13 @@ while(year<=2012){
     Map.addLayer(classified, {min: 0, max: 4, palette: palette}, 'Land Use Classification '+year.toString());
   ----------------------------------------------------------------------------------  */
     
-    // Export the image, specifying scale and region.
+    /*
+        *NOTE: this will create a task to export the classification as a geoTIFF
+        In order to export the classification:
+        > go to the right-hand panel
+        > click tasks
+        > click run for each proposed task (classification will be labeled by year)
+    */
     Export.image.toDrive({
       image: classified,
       description: year.toString(),
